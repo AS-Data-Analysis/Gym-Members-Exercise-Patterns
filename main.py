@@ -1,26 +1,28 @@
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-data = pd.read_csv('gym_members_exercise_tracking.csv')
+df = pd.read_csv('gym_members_exercise_tracking.csv')
 
-# Display all column names
 print("Columns in the dataset:")
-print(data.columns)
+print(df.columns)
 
-# Adjust display settings to show more columns and rows
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', 10)
 
-# Display concise summary of the DataFrame
 print("\nDataset Info:")
-data.info()
+df.info()
 
-# Check for null values in the dataset
 print("\nNull values in each column:")
-print(data.isnull().sum())
+print(df.isnull().sum())
 
-# Display descriptive statistics of the dataset
 print("\nDescriptive Statistics:")
-print(data.describe())
+print(df.describe())
 
-# Display the first few rows again with updated settings
-print(data.head())
+bins = np.linspace(min(df["Age"]), max(df["Age"]), 9)
+
+age_groups = ["18-25", "26-30", "31-35", "36-40", "41-45", "46-50", "51-55", "56+"]
+df["AgeGroup"] = pd.cut(df["Age"], bins=bins, labels=age_groups, include_lowest=True)
+
+df.to_csv('final_df.csv', index=False)

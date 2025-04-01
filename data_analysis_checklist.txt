@@ -1,0 +1,42 @@
+1. Understand the Data:
+Load the dataset and inspect the first few rows (head()).
+Check the shape of the dataset (shape).
+Review column names and data types (info()).
+
+2. Handle Missing Values:
+Identify missing values (isnull().sum()).
+Decide on strategies to handle missing data (e.g., drop rows/columns, fill with mean/median/mode).
+
+3. Summary Statistics:
+Generate descriptive statistics (describe()).
+Check for outliers using statistical measures (e.g., IQR, z-scores).
+
+4. Data Distribution:
+Visualize the distribution of numerical features (e.g., histograms, boxplots).
+Analyze categorical feature distributions (e.g., bar plots).
+
+5. Relationships Between Variables:
+Use scatter plots, pair plots, or correlation heatmaps to identify relationships between numerical variables.
+Analyze relationships between categorical and numerical variables (e.g., boxplots, groupby mean).
+
+6. Data Cleaning:
+Standardize column names (e.g., lowercase, remove spaces).
+Remove duplicates (drop_duplicates()).
+Handle inconsistent data entries (e.g., typos, inconsistent formats).
+
+7. Feature Engineering:
+Create new features if necessary (e.g., combining columns, extracting date parts).
+Encode categorical variables (e.g., one-hot encoding, label encoding).
+
+8. Outlier Detection:
+Identify and handle outliers using visualizations (e.g., boxplots) or statistical methods.
+
+9. Time Series Analysis (if applicable):
+Check for trends, seasonality, and patterns in time-based data.
+
+10. Visualization:
+Use libraries like Matplotlib, Seaborn, or Plotly for visual exploration.
+Create meaningful plots to summarize findings.
+
+11. Insights and Observations:
+Document key insights and patterns observed during the analysis.
