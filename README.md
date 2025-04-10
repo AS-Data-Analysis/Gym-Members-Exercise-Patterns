@@ -1,30 +1,34 @@
-# Data Analysis Log
+# Gym Members Exercise Patterns Analysis
 
-## Dataset Overview
-- **File Name**: gym_members_exercise_tracking.csv
-- **Columns**: 
-  - [List of column names from `data.columns`]
-- **Initial Observations**:
-  - The dataset contains multiple columns with various data types.
-  - A concise summary of the dataset was generated using `data.info()`.
+## Overview
+This project analyzes the exercise patterns of gym members to understand the relationships between various factors and the target variable, `Calories_Burned`.
 
-## Steps Taken
-1. **Loaded the dataset**:
-   - Used `pandas.read_csv()` to load the data.
-   - Displayed the first few rows using `data.head()`.
+## Steps Performed
+1. **Dataset Loading**: The dataset `gym_members_exercise_tracking.csv` was loaded into a pandas DataFrame.
+2. **Data Preprocessing**:
+   - Continuous variables were normalized using `MinMaxScaler`.
+   - Categorical variables were encoded using one-hot encoding.
+   - Missing values and irrelevant columns were handled appropriately.
+3. **Visualization**:
+   - Scatter plots and boxplots were created to visualize relationships between variables.
+   - Correlation analysis was performed to identify significant relationships.
+4. **Correlation Analysis**:
+   - Pearson correlation coefficients and p-values were calculated for continuous variables with the target variable.
 
-2. **Explored the dataset**:
-   - Displayed column names using `data.columns`.
-   - Adjusted display settings to show all columns and rows using `pd.set_option()`.
-   - Generated a concise summary of the dataset using `data.info()`.
-   - Checked for null values in each column using `data.isnull().sum()`.
-   - Generated descriptive statistics for numerical columns using `data.describe()`.
+## Target and Independent Variables
+- **Target Variable**: `Calories_Burned`
+- **Independent Variables**:
+  - `Session_Duration (hours)`
+  - `Fat_Percentage`
 
-## Interesting Findings
-- [Document any patterns, anomalies, or insights you find during analysis.]
+## Tools and Libraries Used
+- Python
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- scikit-learn
+- scipy
 
-## Next Steps
-- Perform data cleaning (e.g., handle missing values, remove duplicates).
-- Visualize data distributions and relationships between variables.
-- Conduct feature engineering if necessary.
-- Document further insights and observations.
+## Output
+The processed dataset is saved as `final_df.csv`, and visualizations are displayed to analyze the relationships between variables.
