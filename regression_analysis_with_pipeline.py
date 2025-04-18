@@ -73,32 +73,24 @@ for degree in range(1, 16):
         best_degree = degree
         best_r2 = avg_r2
         best_mae = avg_mae
+        best_model = poly_pipeline
 
 # Print the best degree, R² score, and MAE
 print(f"Best Degree: {best_degree}")
 print(f"Best Average R² Score: {best_r2}")
 print(f"Best Average Mean Absolute Error: {best_mae}")
 
-# Train the final model using the best degree
-final_preprocessor = ColumnTransformer(
-    transformers=[
-        ('poly_scaler', Pipeline(steps=[
-            ('scaler', MinMaxScaler()),
-            ('poly', PolynomialFeatures(degree=best_degree))
-        ]), ['Session_Duration (hours)', 'Fat_Percentage'])
-    ],
-    remainder='passthrough'
-)
-
-final_pipeline = Pipeline(steps=[
-    ('preprocessor', final_preprocessor),
-    ('regressor', LinearRegression())
-])
-
-final_pipeline.fit(X_train, y_train)
+# Fit the best model on the entire training dataset
+best_model.fit(X_train, y_train)
 
 # Generate predictions on the test set
-y_pred = final_pipeline.predict(X_test)
+y_pred = best_model.predict(X_test)
+
+r2 = r2_score(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
+
+print(f"Test Set R² Score: {r2}")
+print(f"Test Set Mean Absolute Error: {mae}")
 
 # Create a KDE plot for actual vs. predicted values
 plt.figure(figsize=(10, 6))
@@ -108,5 +100,22 @@ plt.title('Distribution of Actual vs Predicted Calories Burned')
 plt.xlabel('Calories Burned')
 plt.ylabel('Density')
 plt.legend()
-plt.savefig('pipeline_actual_vs_predicted_kde.png')
+# plt.show()
+
+# Create a scatterplot of actual vs. predicted values
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x=y_test, y=y_pred, color='blue', alpha=0.6)
+plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], color='red', linestyle='--', linewidth=2, label='Perfect Prediction')
+plt.title('Actual vs Predicted Calories Burned')
+plt.xlabel('Actual Calories Burned')
+plt.ylabel('Predicted Calories Burned')
+plt.legend()
+# plt.show()
+
+# Create a residual plot
+plt.figure(figsize=(10, 6))
+sns.residplot(x=y_pred, y=y_test, lowess=True, color='blue', line_kws={'color': 'red', 'lw': 2})
+plt.title('Residual Plot')
+plt.xlabel('Predicted Calories Burned')
+plt.ylabel('Residuals')
 plt.show()

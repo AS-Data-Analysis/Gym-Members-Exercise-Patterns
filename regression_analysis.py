@@ -53,18 +53,21 @@ for i, col in enumerate(df.columns):
 
 # Adjust layout and save the plots to a file
 plt.tight_layout()
-plt.savefig('scatter_and_boxplots.png')
 plt.close()
-
-# Remove plt.show() to avoid pausing execution
-# plt.show()
 
 # Calculate Pearson coefficient and p-value for each continuous variable with 'Calories_Burned'
 for col in continuous_columns:
     pearson_coef, p_value = stats.pearsonr(df[col], df['Calories_Burned'])
     print(f"{col}:\npearson_coef = {pearson_coef}, p-value = {p_value}\n")
 
+# Calculate the full correlation matrix for all continuous features
+correlation_matrix = df[continuous_columns].corr()
 
+# Create a heatmap for the full correlation matrix
+plt.figure(figsize=(12, 10))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', cbar=True, fmt='.2f')
+plt.title('Full Correlation Matrix: Continuous Features')
+plt.show()
 
 lm = LinearRegression()
 
@@ -108,5 +111,4 @@ plt.title('Distribution of Actual vs Predicted Calories Burned')
 plt.xlabel('Calories Burned')
 plt.ylabel('Density')
 plt.legend()
-plt.savefig('actual_vs_predicted_kde.png')
 plt.show()
