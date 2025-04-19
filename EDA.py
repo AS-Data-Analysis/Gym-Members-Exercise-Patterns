@@ -1,12 +1,4 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.linear_model import LinearRegression
-from scipy import stats
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score, mean_absolute_error
+from requirements import *
 
 # Load the dataset
 df = pd.read_csv('gym_members_exercise_tracking.csv')
@@ -53,7 +45,7 @@ for i, col in enumerate(df.columns):
 
 # Adjust layout and save the plots to a file
 plt.tight_layout()
-plt.close()
+plt.show()
 
 # Calculate Pearson coefficient and p-value for each continuous variable with 'Calories_Burned'
 for col in continuous_columns:
@@ -68,6 +60,26 @@ plt.figure(figsize=(12, 10))
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', cbar=True, fmt='.2f')
 plt.title('Full Correlation Matrix: Continuous Features')
 plt.show()
+
+# Perform one-way ANOVA for 'Workout_Frequency (days/week)' categories
+categories = df['Workout_Frequency (days/week)'].unique()
+grouped_data = [df[df['Workout_Frequency (days/week)'] == category]['Calories_Burned'] for category in categories]
+
+f_stat, p_value = stats.f_oneway(*grouped_data)
+
+print(f"One-way ANOVA results for 'Workout_Frequency (days/week)':")
+print(f"F-statistic: {f_stat}")
+print(f"P-value: {p_value}")
+
+# Perform one-way ANOVA for 'Experience_Level' categories
+categories_exp = df['Experience_Level'].unique()
+grouped_data_exp = [df[df['Experience_Level'] == category]['Calories_Burned'] for category in categories_exp]
+
+f_stat_exp, p_value_exp = stats.f_oneway(*grouped_data_exp)
+
+print(f"One-way ANOVA results for 'Experience_Level':")
+print(f"F-statistic: {f_stat_exp}")
+print(f"P-value: {p_value_exp}")
 
 lm = LinearRegression()
 
