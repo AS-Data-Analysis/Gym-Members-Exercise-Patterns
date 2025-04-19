@@ -31,8 +31,11 @@ The dataset used in this project can be found on Kaggle: [Gym Members Exercise D
   - K-fold cross-validation was used to calculate average R² scores and Mean Absolute Error (MAE) for each degree.
   - The best degree was selected based on the highest R² score and lowest MAE.
 - **Results**:
+  - Test Set R² Score: **0.838**
+  - Test Set Mean Absolute Error: **91.56**
   - The best polynomial degree achieved a high R² score and low MAE, indicating strong predictive performance.
   - However, the model showed signs of overfitting due to its complexity.
+  - ![Polynomial Regressor KDE Plot](kde_plot_continuous.png)
 
 ### 3. Regression Analysis with Mixed Features
 - **Features Used**:
@@ -41,11 +44,13 @@ The dataset used in this project can be found on Kaggle: [Gym Members Exercise D
 - **Model**:
   - Random Forest Regressor.
 - **Evaluation**:
+  - Test Set R² Score: **0.816**
+  - Test Set Mean Absolute Error: **97.84**
   - The model was evaluated using R² score and MAE on the test set.
   - KDE plots, scatterplots, and residual plots were used to visualize the model's performance.
-- **Results**:
   - The Random Forest model captured the overall distribution of the target variable better than the polynomial regression model.
   - However, its R² score and MAE were slightly worse, likely due to the inclusion of categorical variables with less predictive power.
+  - ![Random Forest Regressor KDE Plot](kde_plot_mixed.png)
 
 ## Conclusions
 1. **EDA Insights**:

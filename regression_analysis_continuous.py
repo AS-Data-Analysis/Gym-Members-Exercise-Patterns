@@ -90,6 +90,7 @@ plt.title('Distribution of Actual vs Predicted Calories Burned')
 plt.xlabel('Calories Burned')
 plt.ylabel('Density')
 plt.legend()
+plt.savefig('kde_plot_continuous.png', dpi=300, bbox_inches='tight')
 # plt.show()
 
 # Create a scatterplot of actual vs. predicted values
